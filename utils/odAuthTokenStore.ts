@@ -1,8 +1,8 @@
 import Redis from 'ioredis'
-
+import siteConfig from '../config/site.config'
 // Persistent key-value store is provided by Redis, hosted on Upstash
 // https://vercel.com/integrations/upstash
-const kv = new Redis(process.env.REDIS_URL)
+const kv = new Redis(siteConfig.redisURL)
 
 export async function getOdAuthTokens(): Promise<{ accessToken: unknown; refreshToken: unknown }> {
   const accessToken = await kv.get('access_token')
